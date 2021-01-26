@@ -22,3 +22,5 @@ jobs:
         tags: mariamkhaled/webapp:latest
         load: true
     - run: docker push mariamkhaled/webapp:latest
+    - name: Unit Test
+      run: npm test
