@@ -22,12 +22,11 @@ jobs:
         tags: mariamkhaled/webapp:latest
         load: true
     - run: docker push mariamkhaled/webapp:latest
-
+    
+    - name: Unit Test
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-
-    - name: Unit Test
     - run: npm ci
     - run: npm run test
 
