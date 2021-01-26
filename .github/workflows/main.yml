@@ -24,16 +24,13 @@ jobs:
     - run: docker push mariamkhaled/webapp:latest
     
     - name: Unit Test setup
-    - uses: actions/setup-node@v1
+      uses: actions/setup-node@v1
       with:
         node-version: '12.x'
     - run: npm ci
-      
-    - name: Unit Testing
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
     - run: npm run test
+      
+
 
 
 
