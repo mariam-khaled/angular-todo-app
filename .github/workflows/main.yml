@@ -21,12 +21,12 @@ jobs:
         context: .
         tags: mariamkhaled/webapp:latest
         load: true
-    - run: |
-            docker push mariamkhaled/webapp:latest
-            docker run -d -v $(pwd):/workdir --name angular-e2e-container rogargon/angular-e2e
-            docker exec angular-e2e-container npm install
-            docker exec angular-e2e-container npm run start
-            docker exec angular-e2e-container npm run e2e
+    #- run: |
+            #docker push mariamkhaled/webapp:latest
+            #docker run -d -v $(pwd):/workdir --name angular-e2e-container rogargon/angular-e2e
+            #docker exec angular-e2e-container npm install
+            #docker exec angular-e2e-container npm run start
+            #docker exec angular-e2e-container npm run e2e
     
     #- name: Unit Test setup
     #  uses: actions/setup-node@v1
