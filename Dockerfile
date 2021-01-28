@@ -30,6 +30,9 @@ RUN npm i
 
 CMD [ "./node_modules/@angular/cli/bin/ng", "test" ]
 
-# Stage 3: Deploy
+# Stage 3: E2E Testing
+CMD [ "./node_modules/@angular/cli/bin/ng", "e2e" ]
+
+# Stage 4: Deploy
 FROM nginx:1.17.1-alpine
 COPY --from=build-step /app/docs /usr/share/nginx/html
