@@ -24,7 +24,7 @@ jobs:
     - name: Upload image
       uses: ishworkh/docker-image-artifact-upload@v1
       with:
-        image: "test_image:latest"
+        image: "webapp:latest"
     #- run: |
             #docker push mariamkhaled/webapp:latest
             #docker run -d -v $(pwd):/workdir --name angular-e2e-container rogargon/angular-e2e
