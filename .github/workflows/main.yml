@@ -29,10 +29,10 @@ jobs:
         tags: mariamkhaled/webapp:latest
         load: true
         
-    - name: Upload image
-      uses: ishworkh/docker-image-artifact-upload@v1
-      with:
-        image: "mariamkhaled/webapp:latest"
+    #- name: Upload image
+    #  uses: ishworkh/docker-image-artifact-upload@v1
+    #  with:
+    #    image: "mariamkhaled/webapp:latest"
     #- run: |
             #docker push mariamkhaled/webapp:latest
             #docker run -d -v $(pwd):/workdir --name angular-e2e-container rogargon/angular-e2e
