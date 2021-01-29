@@ -32,5 +32,5 @@ jobs:
     - name: Upload image
       uses: ishworkh/docker-image-artifact-upload@v1
       with:
-        image: "mariamkhaled/to-do:latest"
+        image: "mariamkhaled/webapp:latest"
         expiration: 5m
