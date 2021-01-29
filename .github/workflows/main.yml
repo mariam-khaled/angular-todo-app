@@ -8,50 +8,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-    - name: Setup
-      uses: docker/setup-buildx-action@v1
+    - uses: actions/checkout@v2
+    - uses: docker/setup-buildx-action@v1
       with:
         driver: docker
-        
-    - name: Login to dockerhub
-      uses: docker/login-action@v1
+    - uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        
-    - name: Build, Test and Push image to dockerhub 
-      uses: docker/build-push-action@v2
+    - uses: docker/build-push-action@v2
       with:
         context: .
         tags: mariamkhaled/webapp:latest
         load: true
-        
-    #- name: Upload image
-    #  uses: ishworkh/docker-image-artifact-upload@v1
-    #  with:
-    #    image: "mariamkhaled/webapp:latest"
-    #- run: |
-            #docker push mariamkhaled/webapp:latest
-            #docker run -d -v $(pwd):/workdir --name angular-e2e-container rogargon/angular-e2e
-            #docker exec angular-e2e-container npm install
-            #docker exec angular-e2e-container npm run start
-            #docker exec angular-e2e-container npm run e2e
-    
-    #- name: Unit Test setup
-    #  uses: actions/setup-node@v1
-    #  with:
-    #    node-version: '12.x'
-    #- run: npm i --save-dev karma-phantomjs-launcher
-    #- run: npm install @types/node@latest
-    #- run: npm ci
-    #- run: npm run build --if-present
-    #- run: npm run test
-      
-
-
-
-
-
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+          name: dist-without-markdown
+          path: |
+            dist
+            !dist/**/*.md
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v2
+      with:
+          name: code-coverage-report
+          path: output/test/code-coverage.html
