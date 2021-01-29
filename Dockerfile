@@ -33,6 +33,9 @@ CMD [ "./node_modules/@angular/cli/bin/ng", "test" ]
 # Stage 3: E2E Testing
 CMD [ "./node_modules/@angular/cli/bin/ng", "e2e" ]
 
-# Stage 4: Deploy
+# Stage 4: Linting
+CMD [ "./node_modules/@angular/cli/bin/ng", "lint" ]
+
+# Stage 5: Deploy
 FROM nginx:1.17.1-alpine
 COPY --from=build-step /app/docs /usr/share/nginx/html
