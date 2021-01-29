@@ -29,7 +29,7 @@ jobs:
         tags: mariamkhaled/to-do:latest
         load: true
         
-    - name: Upload image
-      uses: ishworkh/docker-image-artifact-upload@v1
-      with:
-        image: "mariamkhaled/to-do:latest"
+    #- name: Upload image
+     # uses: ishworkh/docker-image-artifact-upload@v1
+      #with:
+       # image: "mariamkhaled/to-do:latest"
