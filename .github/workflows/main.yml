@@ -27,7 +27,7 @@ jobs:
         load: true
         
     - name: Upload image
-    - uses: ishworkh/docker-image-artifact-upload@v1
+      uses: ishworkh/docker-image-artifact-upload@v1
       with:
         image: "mariamkhaled/webapp:latest"
     #- run: |
