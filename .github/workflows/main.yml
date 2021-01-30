@@ -33,7 +33,7 @@ jobs:
         #load: true
         push: true
         
-    - name: Upload image
+    - name: Upload artifact
       uses: ishworkh/docker-image-artifact-upload@v1
       with:
         image: "mariamkhaled/webapp:latest"
@@ -59,17 +59,22 @@ jobs:
         prerelease: true
 
     - name: Publish
-      id: publish_npm
-      if: steps.autotagger.outputs.tagname != ''
-      uses: author/action-publish@stable
+      #id: publish_npm
+      #if: steps.autotagger.outputs.tagname != ''
+      #uses: author/action-publish@stable
+      uses: StuYarrow/publish-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          id: ${{ steps.create_release.outputs.id }}
       #uses: actions/setup-node@v1
       #with:
         #node-version: '12.x'
         #registry-url: 'https://registry.npmjs.org'
     #- run: npm install
     #- run: npm publish
-      env:
-        REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+      #env:
+        #REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
 
     - name: Rollback Release
       if: failure() && steps.create_release.outputs.id != ''
