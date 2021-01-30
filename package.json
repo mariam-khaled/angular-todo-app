@@ -1,5 +1,5 @@
 {
-  "name": "todo-app",
+  "name": "@mariamkhaled/todo-app",
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
