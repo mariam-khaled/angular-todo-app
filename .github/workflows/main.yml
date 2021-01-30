@@ -3,8 +3,8 @@ name: ci/cd
 on:
   push:
     branches: master
-    #tags:
-     # - 'v*'
+    tags:
+      - 'v*'
 
 jobs:
   workflow:
@@ -41,31 +41,26 @@ jobs:
         image: "mariamkhaled/webapp:latest"
         expiration: 5m
     
-    - name: Tag
-      id: autotagger
-      uses: butlerlogic/action-autotag@stable
-      with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-    
     - name: Create release
       id: create_release
-      if: steps.autotagger.outputs.tagname != ''
-      uses: actions/create-release@v1.0.0
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-          draft: false
-          prerelease: true
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this Release
+          - First Change
+          - Second Change
+        draft: true
+        prerelease: false
         
     - name: Publish
       #id: publish_npm
       #if: steps.autotagger.outputs.tagname != ''
       #uses: author/action-publish@stable
-      uses: eregon/publish-release@v1
+      uses: StuYarrow/publish-release@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -89,10 +84,5 @@ jobs:
         tag: ${{ steps.autotagger.outputs.tagname }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-    
-    
-    
-    
     
     
