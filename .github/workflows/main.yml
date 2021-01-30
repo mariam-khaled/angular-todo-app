@@ -3,8 +3,8 @@ name: ci/cd
 on:
   push:
     branches: master
-    tags:
-      - 'v*'
+    #tags:
+     # - 'v*'
 
 jobs:
   workflow:
