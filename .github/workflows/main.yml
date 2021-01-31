@@ -78,9 +78,9 @@ jobs:
       uses: StuYarrow/publish-release@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
+      #with:
           #id: ${{ steps.buildnumber.outputs.build_number }}
-          id: 1.1.0 
+          #id: 1.1.0 
       #uses: actions/setup-node@v1
       #with:
         #node-version: '12.x'
