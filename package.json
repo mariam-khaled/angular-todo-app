@@ -1,6 +1,6 @@
 {
   "name": "@mariamkhaled/todo-app",
-  "version": "x.x.x",
+  "version": "0.0.0",
   "main": "index.js",
   "scripts": {
     "ng": "ng",
