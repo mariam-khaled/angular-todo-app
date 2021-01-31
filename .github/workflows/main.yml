@@ -80,7 +80,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           #id: ${{ steps.buildnumber.outputs.build_number }}
-          id: "${{ steps.previous_step.outputs.version }}"
+          id: ${{ steps.create_release.outputs.id }}
       #uses: actions/setup-node@v1
       #with:
         #node-version: '12.x'
