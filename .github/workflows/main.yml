@@ -39,7 +39,7 @@ jobs:
       uses: ishworkh/docker-image-artifact-upload@v1
       with:
         image: "mariamkhaled/webapp:latest"
-        expiration: 5m
+        expiration: 4m
     
     - name: Tag
       id: autotagger
