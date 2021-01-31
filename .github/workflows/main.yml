@@ -62,8 +62,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
-        tag_name: ${{ steps.buildnumber.outputs.build_number }}
-        release_name: Version ${{ steps.buildnumber.outputs.build_number }}
+        tag_name: ${{ steps.autotagger.outputs.tagname }}
+        release_name: Version ${{ steps.autotagger.outputs.version }}
         body: |
           Changes in this Release
           - First Change
@@ -79,7 +79,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          id: ${{ steps.buildnumber.outputs.build_number }}
+          id: ${{ steps.create_release.outputs.id }}
       #uses: actions/setup-node@v1
       #with:
         #node-version: '12.x'
