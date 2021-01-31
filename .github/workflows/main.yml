@@ -46,6 +46,7 @@ jobs:
       uses: butlerlogic/action-autotag@stable
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        strategy: docker
     
     - name: Generate build number
       id: buildnumber
