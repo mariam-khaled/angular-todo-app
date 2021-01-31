@@ -42,6 +42,7 @@ jobs:
         expiration: 5m
     
     - name: Create release
+      if: steps.autotagger.outputs.tagname != ''
       id: create_release
       uses: actions/create-release@v1
       env:
