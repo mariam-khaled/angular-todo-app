@@ -32,7 +32,6 @@ jobs:
       with:
         context: .
         tags: mariamkhaled/webapp:latest
-        #load: true
         push: true
         
     - name: Upload artifact
@@ -55,10 +54,9 @@ jobs:
         token: ${{secrets.GITHUB_TOKEN}} 
     
     - name: Create release
-      if: steps.autotagger.outputs.tagname != ''
+      if: steps.autotagger.outputs.tagname != '' && steps.autotagger.outputs.version != ''
       id: create_release
       uses: actions/create-release@v1
-      #uses: marvinpinto/action-automatic-releases@latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
@@ -66,37 +64,23 @@ jobs:
         release_name: Version ${{ steps.autotagger.outputs.version }}
         body: |
           Changes in this Release
-          - First Change
-          - Second Change
         draft: false
         prerelease: false
         
     - name: Publish
-      #id: publish_npm
-      #if: steps.autotagger.outputs.tagname != ''
-      #uses: author/action-publish@stable
+      id: publish_build
+      if: steps.autotagger.outputs.tagname != '' && steps.create_release.outputs.id !='' 
       uses: StuYarrow/publish-release@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          #id: ${{ steps.buildnumber.outputs.build_number }}
           id: ${{ steps.create_release.outputs.id }}
-      #uses: actions/setup-node@v1
-      #with:
-        #node-version: '12.x'
-        #registry-url: 'https://registry.npmjs.org'
-    #- run: npm install
-    #- run: npm publish
-      #env:
-        #REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
 
     - name: Rollback Release
-      if: failure() && steps.create_release.outputs.id != ''
+      if: failure() && steps.create_release.outputs.id != '' && steps.create_release.id !=''
       uses: author/action-rollback@stable
       with:
-        # Using a known release ID
         id: ${{ steps.create_release.id }}
-        # Using a tag name
         tag: ${{ steps.autotagger.outputs.tagname }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
