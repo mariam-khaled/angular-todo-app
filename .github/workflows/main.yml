@@ -47,6 +47,12 @@ jobs:
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v3 
+      with:
+        token: ${{secrets.GITHUB_TOKEN}} 
+    
     - name: Create release
       if: steps.autotagger.outputs.tagname != ''
       id: create_release
@@ -55,8 +61,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
-        tag_name: ${{ steps.autotagger.outputs.tagname }}
-        release_name: Version ${{ steps.autotagger.outputs.version }}
+        tag_name: ${{ steps.buildnumber.outputs.build_number }}
+        release_name: Version ${{ steps.buildnumber.outputs.build_number }}
         body: |
           Changes in this Release
           - First Change
@@ -72,7 +78,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          id: ${{ steps.create_release.outputs.id }}
+          id: ${{ steps.buildnumber.outputs.build_number }}
       #uses: actions/setup-node@v1
       #with:
         #node-version: '12.x'
