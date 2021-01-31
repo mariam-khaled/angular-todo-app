@@ -79,7 +79,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          id: ${{ steps.create_release.outputs.id }}
+          id: ${{ steps.create_release.id }}
       #uses: actions/setup-node@v1
       #with:
         #node-version: '12.x'
