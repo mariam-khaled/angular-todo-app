@@ -52,7 +52,7 @@ jobs:
       uses: einaregilsson/build-number@v3 
       with:
         token: ${{secrets.GITHUB_TOKEN}} 
-    
+
     - name: Create release
       if: steps.autotagger.outputs.tagname != '' && steps.autotagger.outputs.version != ''
       id: create_release
