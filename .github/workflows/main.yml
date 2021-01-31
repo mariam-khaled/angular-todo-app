@@ -41,10 +41,17 @@ jobs:
         image: "mariamkhaled/webapp:latest"
         expiration: 5m
     
+    - name: Tag
+      id: autotagger
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    
     - name: Create release
       if: steps.autotagger.outputs.tagname != ''
       id: create_release
       uses: actions/create-release@v1
+      #uses: marvinpinto/action-automatic-releases@latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
